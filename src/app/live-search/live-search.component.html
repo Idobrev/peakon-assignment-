@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="dropdown-container">
+    <span>Manager</span>
+    <input
+      #selector
+      (keyup)="onChange(selector.value)"
+      type="text"
+      (focusin)="menuOpened = true"
+      (focusout)="menuOpened = false"
+      placeholder="Choose Manager"
+    />
+    <div class="arrow-holder">
+      <span class="arrow" [ngClass]="{ up: menuOpened, down: !menuOpened }">
+      </span>
+    </div>
+    <div class="manager-contaier">
+      <ng-container *ngFor="let manager of managers">
+        <div class="manager-field">
+          <div class="initials">
+            {{ manager.attributes.firstName[0]
+            }}{{ manager.attributes.lastName[0] }}
+          </div>
+          <div class="attributes">
+            <span class="name">{{ manager.attributes.name }}</span>
+            <span class="email">{{ manager.attributes.email }}</span>
+          </div>
+        </div>
+        <div class="hr"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>
