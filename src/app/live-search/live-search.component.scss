@@ -1,14 +1,13 @@
 // Variables can be set for colors. Usually they are derived from a theme, so I am not going to put any now
 
 .container {
-  width: 350px;
+  width: 370px;
   display: flex;
   position: relative;
 }
 
 .dropdown-container {
   width: 100%;
-  min-height: 200px;
   background-color: #f8f7f5;
   display: flex;
   flex-direction: column;
@@ -53,12 +52,21 @@
   border-color: #cccccc;
 }
 
+.manager-contaier::-webkit-scrollbar {
+  display: none;
+}
+
 .manager-contaier {
   background-color: white;
   border: 1px solid #cecece;
   border-radius: 5px;
   box-shadow: 0 0 3px #cecece;
   padding: 10px 20px 0px 20px;
+  height: 140px;
+  overflow: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 
   .manager-field {
     display: flex;

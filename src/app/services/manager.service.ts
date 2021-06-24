@@ -15,17 +15,24 @@ export class ManagerService {
 
   getManagers(): Observable<Manager[]> {
     return this.http.get(this.baseUrl).pipe(
-      // we are adding the email to the Manager model from the info and only supplying that. As other data is not needed
+      // We are adding the email to the Manager model from the info and discarding accounts data as it is not needed atmn
       // Note: Models must be described properly, regardless, but we skip that for readability.
       map((response: { data: Manager[], included: ManagerInfo[]}) => {
         const managerInfoMap = new Map<number, ManagerInfo>();
+        // create the manager Info map for easy reading
         response.included.forEach(info => {
-          managerInfoMap.set(info.id, info);
-        });
-        return response.data.map((manager) => {
-          if (managerInfoMap.has(manager.id)) {
-            manager.attributes.email = managerInfoMap.get(manager.id).attributes.email;
+          if (info.type === 'employees') { // not a fan of data mixing
+            response.data.push(info as any);
+          }else {
+            managerInfoMap.set(info.id, info);
           }
+        });
+        // add the needed additional properties to the manager model. Purely for completion
+        return response.data.map((manager) => {
+          if (managerInfoMap.has(manager.relationships.account.data.id)) {
+            manager.attributes.email = managerInfoMap.get(manager.relationships.account.data.id).attributes.email;
+          }
+          manager.attributes.search = (manager.attributes.firstName + manager.attributes.lastName).toLocaleLowerCase();
           return manager;
         });
       }),

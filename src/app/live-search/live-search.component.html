@@ -3,7 +3,7 @@
     <span>Manager</span>
     <input
       #selector
-      (keyup)="onChange(selector.value)"
+      (keyup)="onChange(selector.value.toLowerCase())"
       type="text"
       (focusin)="menuOpened = true"
       (focusout)="menuOpened = false"
@@ -13,8 +13,8 @@
       <span class="arrow" [ngClass]="{ up: menuOpened, down: !menuOpened }">
       </span>
     </div>
-    <div class="manager-contaier">
-      <ng-container *ngFor="let manager of managers">
+    <div class="manager-contaier" [hidden]="!menuOpened">
+      <ng-container *ngFor="let manager of filteredManagers">
         <div class="manager-field">
           <div class="initials">
             {{ manager.attributes.firstName[0]
