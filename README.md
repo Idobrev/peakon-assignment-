@@ -8,9 +8,9 @@ Build on `Angular` 10.2.5
 
 A Manager service has been created, that supplies the data to the view.
 
-1 Component has been created ( `app/live-search` ) that handles the view. Note: unit test files are in .spec.ts
+1 Component has been created ( `src/app/live-search` ) that handles the view. Note: unit test files are in .spec.ts
 
-1 Service has been created ( `app/services/manager.service` ) that can supply any view with the Managers data via an Observable
+1 Service has been created ( `src/app/services/manager.service` ) that can supply any view with the Managers data via an Observable
 
 For each "employee" entry from the json data a Managers model has been created.
 
